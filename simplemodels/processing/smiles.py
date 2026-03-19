@@ -1,6 +1,7 @@
 import ase
 
 
+# TODO 3
 def process_smile(smile: str) -> ase.Atoms:  # noqa: D103
     # Принимает строку вида SMILE charge mult и возвращает объект ase.Atoms
     # Должна сгенирирроватиь 3D координаты при помощи RDKit

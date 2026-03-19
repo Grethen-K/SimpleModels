@@ -4,6 +4,7 @@ import click
 from simplemodels.processing import process_smiles, process_xyz
 
 
+# TODO 1
 def validate_input(file_path: str) -> str:
     """Выбрасывает исклюбие, если файл задан неверно.
 
@@ -14,6 +15,7 @@ def validate_input(file_path: str) -> str:
     pass
 
 
+# XXX
 def calculate_molecule(molecule: ase.Atoms, output: str, name: str):  # noqa: D103
     from ase.optimize import BFGS  # noqa: PLC0415
     from orb_models.forcefield import pretrained  # noqa: PLC0415
@@ -48,7 +50,9 @@ def main(file_path: str, config: str | None = None, output: str | None = None): 
     elif mol_type == "xyz":
         molecules, names = process_xyz(file_path)
 
+    # TODO 2
     if output is None:
+        # Получить путь для выходных данных
         pass
 
     for molecule, name in zip(molecules, names):
