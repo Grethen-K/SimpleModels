@@ -19,3 +19,6 @@ dev = [
     "ruff>=0.15.1",
     "ty>=0.0.17",
 ]
+
+[project.scripts]
+example_app = "simplemodels.basic:main"
