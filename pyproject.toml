@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "ase>=3.27.0",
     "click>=8.3.1",
+    "minimahopping",
     "pandas>=3.0.1",
     "seaborn>=0.13.2",
 ]
@@ -19,6 +20,9 @@ dev = [
     "ruff>=0.15.1",
     "ty>=0.0.17",
 ]
+
+[tool.uv.sources]
+minimahopping = { git = "https://gitlab.com/goedeckergroup/ase_mh.git" }
 
 [project.scripts]
 example_app = "simplemodels.basic:main"
