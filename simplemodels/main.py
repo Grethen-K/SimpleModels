@@ -1,17 +1,20 @@
-from typing import Any, Dict
+"""Core pipeline orchestrator for conformer generation."""
+
+from typing import Any
 
 import click
-from analyzer import DScribeAnalyzer
-from config import load_config
-from conformer_generator import ASEConformerGenerator, OpenBabelConformerGenerator
-from input_handler import InputHandler
-from optimizer import DFTConformerOptimizer
-from reporter import Reporter
-from utils import BaseAnalyzer, BaseConformerGenerator, BaseOptimizer
+
+from .analyzer import DScribeAnalyzer
+from .config import load_config
+from .conformer_generator import ASEConformerGenerator, OpenBabelConformerGenerator
+from .input_handler import InputHandler
+from .optimizer import DFTConformerOptimizer
+from .reporter import Reporter
+from .utils import BaseAnalyzer, BaseConformerGenerator, BaseOptimizer
 
 
 class ConformerPipeline:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         """Инициализация пайплайна с конфигурацией и инъекцией зависимостей.
 
         :param config: Словарь с параметрами (включая 'generator_type', 'analyzer_type', 'enable_optimization')

@@ -1,26 +1,42 @@
-from typing import Any, Dict
+"""Configuration management for the conformer generation pipeline."""
 
-# Конфигурация по умолчанию
-"""Словарь с параметрами конфигурации по умолчанию для пайплайна генерации конформеров."""
-DEFAULT_CONFIG = {
-    "input_format": "smiles",  # 'smiles' или 'xyz'
-    "generator_type": "ase",  # 'ase' или 'openbabel'
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+DEFAULT_CONFIG: dict[str, Any] = {
+    "input_format": "smiles",  # 'smiles' or 'xyz'
+    "generator_type": "ase",  # 'ase' or 'openbabel'
     "analyzer_type": "dscribe",  # 'dscribe'
     "optimizer_type": "dft",  # 'dft'
-    "enable_optimization": False,  # Включить дооптимизацию
-    "num_conformers": 100,  # Число конформеров
-    "output_dir": "output",  # Папка для выходных файлов
-    "report_path": "report.html",  # Путь к HTML-отчету
+    "enable_optimization": False,
+    "num_conformers": 100,
+    "output_dir": "output",
+    "report_path": "report.html",
+    "conformers": {},
 }
 
 
-def load_config(config_path: str = None) -> Dict[str, Any]:
-    """Загружает конфигурацию из файла или возвращает по умолчанию.
+def load_config(config_path: str = None) -> dict[str, Any]:
+    """Load configuration from a YAML file or return defaults.
 
-    :param config_path: Путь к YAML/JSON файлу конфигурации
-    :return: Словарь конфигурации
+    Args:
+        config_path: Path to a YAML configuration file.
+
+    Returns:
+        Configuration dictionary with defaults applied for missing keys.
     """
+    config = DEFAULT_CONFIG.copy()
+
     if config_path:
-        # Заглушка: Реализовать загрузку из YAML/JSON
-        raise NotImplementedError("Реализовать загрузку конфигурации из файла")
-    return DEFAULT_CONFIG.copy()
+        path = Path(config_path)
+        if not path.exists():
+            raise FileNotFoundError(f"Config file not found: {config_path}")
+
+        with open(path) as f:
+            user_config = yaml.safe_load(f) or {}
+
+        config.update(user_config)
+
+    return config

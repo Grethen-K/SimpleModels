@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 
-from utils import BaseAnalyzer
+from .utils import BaseAnalyzer
 
 
 class DScribeAnalyzer(BaseAnalyzer):

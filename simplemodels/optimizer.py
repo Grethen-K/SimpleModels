@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 
-from utils import BaseOptimizer
+from .utils import BaseOptimizer
 
 
 class DFTConformerOptimizer(BaseOptimizer):
